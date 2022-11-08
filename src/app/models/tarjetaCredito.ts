@@ -1,5 +1,5 @@
-export  interface TarjetaCredito {
-  id?: number;
+export interface TarjetaCredito {
+  id: number;
   titular: string;
   numeroTarjeta: string;
   fechaExpiracion: String;
