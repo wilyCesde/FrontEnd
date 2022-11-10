@@ -1,5 +1,7 @@
+import { TarjetaService } from './../../../services/tarjeta.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TarjetaCredito } from 'src/app/models/tarjetaCredito';
 @Component({
   selector: 'app-tarjeta-credito',
   templateUrl: './tarjeta-credito.component.html',
@@ -7,7 +9,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class TarjetaCreditoComponent implements OnInit {
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private _tarjetaService: TarjetaService
+  ) {
     this.form = this.formBuilder.group({
       id: 0,
       titular: ['', [Validators.required]],
@@ -33,6 +38,15 @@ export class TarjetaCreditoComponent implements OnInit {
   ngOnInit(): void {}
 
   guardarTarjeta() {
-    console.log(this.form);
+    const tarjeta: TarjetaCredito = {
+      titular: this.form.get('titular')?.value,
+      numeroTarjeta: this.form.get('numeroTarjeta')?.value,
+      fechaExpiracion: this.form.get('fechaExpiracion')?.value,
+      cvv: this.form.get('cvv')?.value,
+    };
+    this._tarjetaService.guardarTarjeta(tarjeta).subscribe((data) => {
+      console.log('guardado exitosamente');
+      this.form.reset();
+    });
   }
 }

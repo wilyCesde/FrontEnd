@@ -8,7 +8,7 @@ import { TarjetaCredito } from '../models/tarjetaCredito';
 })
 export class TarjetaService {
   myAppUrl = 'https://localhost:7107/';
-  myApiUrl = 'api/tarjetaCredito/';
+  myApiUrl = 'api/TargetaCredito/';
   constructor(private http: HttpClient) {}
 
   guardarTarjeta(tarjeta: TarjetaCredito): Observable<TarjetaCredito> {
